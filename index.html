@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juego - Adivina la carta</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="index.js" type="module"></script>
+    <link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
+    <script type="module" src="index.js" defer></script>
   </head>
   <body>
+    <header>
+      <h1>Adivina la carta</h1>
+    </header>
     <main>
-      <div class="initial-screen">
-        <h1>Las reglas del juego son las siguientes:</h1>
+      <div class="initial-container">
+        <h2>Las reglas del juego son las siguientes:</h2>
         <p>
           A cada turno, se extraerá una carta de la baraja francesa, y se te
           preguntará si crees que la siguiente carta en el mazo va a ser mayor o
@@ -25,11 +29,42 @@
           Si aciertas, se te sumará un punto a tu puntuación. En cualquier
           momento puedes darle a cancelar y parar el juego.
         </p>
-        <form>
-          <h2>Introduce un nombre de usuario si deseas jugar:</h2>
-          <input type="text" class="text-input" required />
+        <form class="form1">
+          <input
+            type="text"
+            name="username"
+            class="text-input"
+            placeholder="Inserta tu usuario"
+            required
+          />
           <input type="submit" value="Enviar" class="btn" />
         </form>
+      </div>
+      <div class="game-container" hidden>
+        <div id="username-container" class="username-container">
+          <p>Bienvenido <span id="username">...</span></p>
+        </div>
+        <p>Si aciertas, se te sumará un punto a tu puntuación.</p>
+        <p>En cualquier momento puedes darle a cancelar y parar el juego.</p>
+        <div class="card-container">
+          <div class="card-1 card">
+            <span class="card-1-content">Carta 1</span>
+          </div>
+          <div class="card-2 card">
+            <span class="card-2-content">Carta 2</span>
+          </div>
+        </div>
+        <button class="btn start-game">Iniciar juego</button>
+        <div class="high-low-btns" hidden>
+          <button class="btn lower">Menor</button>
+          <button class="btn keep-going">Seguir</button>
+          <button class="btn higher">Mayor</button>
+        </div>
+        <div class="result-flex">
+          <div class="score-counter counter"></div>
+          <div class="result-text">......</div>
+          <div class="match-counter counter"></div>
+        </div>
       </div>
     </main>
   </body>

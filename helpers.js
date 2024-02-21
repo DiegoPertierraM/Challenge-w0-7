@@ -88,81 +88,128 @@ const solveRound = (userChoice, machineCard, actualCard, userName) => {
 };
 
 export const playCardGame = () => {
-  // const cardArray = shuffleArray(generateCardArray());
-  // let score = 0;
-  // let match = 0;
-  // const byeMessage = `Tu puntuación ha sido ${score} aciertos en ${match} rondas. Hasta la próxima!`;
-  // // let userName = prompt(
-  // //   'Bienvenido! Introduce tu nombre de usuario si deseas jugar:'
-  // // );
-  // // if (userName === null) {
-  // //   return 'Hasta la próxima!';
-  // // }
-  // // if (userName === '' || userName === ' ') {
-  // //   userName = 'jugador';
-  // // }
-  // // alert(`Bienvenido ${userName}!
-  // // Si aciertas, se te sumará un punto a tu puntuación.
-  // // En cualquier momento puedes darle a cancelar y parar el juego.`);
-  // let playAgain = true;
-  // // ---> Usar do while mejor
-  // while (playAgain === true) {
-  //   const machineCard = pickRandomCard(cardArray);
-  //   // alert(`La carta es el ${machineCard.name} de ${machineCard.suit}`);
-  //   const actualCard = pickRandomCard(cardArray);
-  //   do {
-  //     // let userChoice = prompt(
-  //     //   '¿Crees que la siguiente carta será mayor o menor?'
-  //     // ).toLowerCase();
-  //     const { scoreIncrement, matchIncrement, message } = solveRound(
-  //       userChoice,
-  //       machineCard,
-  //       actualCard,
-  //       userName
-  //     );
-  //     score += scoreIncrement;
-  //     match += matchIncrement;
-  //     // alert(message);
-  //     if (matchIncrement) {
-  //       break;
-  //     }
-  //   } while (true);
-  //   console.log('Cards left', cardArray.length);
-  //   if (!cardArray.length) {
-  //     // alert('Se acabaron las cartas!');
-  //     break;
-  //   }
-  //   // playAgain = confirm(`${userName} quieres jugar de nuevo?.
-  //   // De momento has jugado ${match} veces y ganado ${score} veces!`);
-  // }
-  // // alert(`Gracias por haber jugado **${userName}**
-  // //   Has jugado ${match} vez y ganado ${score} vez!`);
+  // ---> Usar do while mejor
+  while (playAgain === true) {
+    const machineCard = pickRandomCard(cardArray);
+    // alert(`La carta es el ${machineCard.name} de ${machineCard.suit}`);
+    const actualCard = pickRandomCard(cardArray);
+    do {
+      // let userChoice = prompt(
+      //   '¿Crees que la siguiente carta será mayor o menor?'
+      // ).toLowerCase();
+      const { scoreIncrement, matchIncrement, message } = solveRound(
+        userChoice,
+        machineCard,
+        actualCard,
+        userName
+      );
+      score += scoreIncrement;
+      match += matchIncrement;
+      // alert(message);
+      if (matchIncrement) {
+        break;
+      }
+    } while (true);
+    console.log('Cards left', cardArray.length);
+    if (!cardArray.length) {
+      // alert('Se acabaron las cartas!');
+      break;
+    }
+    // playAgain = confirm(`${userName} quieres jugar de nuevo?.
+    // De momento has jugado ${match} veces y ganado ${score} veces!`);
+  }
+  // alert(`Gracias por haber jugado **${userName}**
+  //   Has jugado ${match} vez y ganado ${score} vez!`);
 };
 
 const formElement = document.querySelector('form');
 const sendBtn = document.querySelector('.btn');
 
-const hideElement = (element) => {
-  element.style.display = 'none';
-};
-
-const captureValue = () => {
-  const textInput = document.querySelector('.text-input');
-  let userName = textInput.value;
-  return userName;
-};
-
 export const game = () => {
-  const onClick = () => {
-    const initialScreen = document.querySelector('.initial-screen');
-    // hideElement(initialScreen);
-  };
-  const onSubmit = (event) => {
-    event.preventDefault();
-    formElement.reset();
-    return captureValue();
+  const cardArray = shuffleArray(generateCardArray());
+  let score = 0;
+  let match = 0;
+  let userName;
+  let machineCard = '';
+  let playAgain = true;
+  let userChoice;
+  const placeholder = document.querySelector('#username');
+  let initialContainer = document.querySelector('.initial-container');
+  let gameContainer = document.querySelector('.game-container');
+  let cardsContainer = document.querySelector('.cards-container');
+  let startGameBtn = document.querySelector('.start-game');
+  let highLowBtns = document.querySelector('.high-low-btns');
+  let card1 = document.querySelector('.card-1');
+  let card2 = document.querySelector('.card-2');
+  let lower = document.querySelector('.lower');
+  let higher = document.querySelector('.higher');
+  let keepGoing = document.querySelector('.keep-going');
+  let resultText = document.querySelector('.result-text');
+  let scoreCounter = document.querySelector('.score-counter');
+  let matchCounter = document.querySelector('.match-counter');
+
+  const startGame = () => {
+    startGameBtn.style.display = 'none';
+    highLowBtns.style.display = 'flex';
+    machineCard = pickRandomCard(cardArray);
+    card1.innerHTML = machineCard.name + ' ' + machineCard.suit;
+    scoreCounter.innerHTML = score;
+    matchCounter.innerHTML = match;
   };
 
-  formElement.addEventListener('submit', onSubmit);
-  sendBtn.addEventListener('click', onClick);
+  const getLower = () => {
+    userChoice = 'lower';
+    const actualCard = pickRandomCard(cardArray);
+    if (actualCard.number < machineCard.number) {
+      resultText.innerHTML = `Ganaste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+      score++;
+    } else {
+      resultText.innerHTML = `Perdiste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+    }
+    card2.innerHTML = actualCard.name + ' ' + actualCard.suit;
+    match++;
+    scoreCounter.innerHTML = score;
+    matchCounter.innerHTML = match;
+  };
+
+  const getHigher = () => {
+    userChoice = 'higher';
+    const actualCard = pickRandomCard(cardArray);
+    if (actualCard.number > machineCard.number) {
+      resultText.innerHTML = `Ganaste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+      score++;
+    } else {
+      resultText.innerHTML = `Perdiste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+    }
+    card2.innerHTML = actualCard.name + ' ' + actualCard.suit;
+    match++;
+  };
+
+  const getMachineCard = () => {
+    userChoice = 'higher';
+    machineCard = pickRandomCard(cardArray);
+    card1.innerHTML = machineCard.name + ' ' + machineCard.suit;
+    card2.innerHTML = '';
+  };
+
+  const onSubmitForm1 = (event) => {
+    event.preventDefault();
+    userName = event.target.elements.username.value;
+    placeholder.innerHTML = userName;
+    initialContainer.style.display = 'none';
+    gameContainer.style.display = 'flex';
+    cardsContainer.style.display = 'flex';
+    formElement.reset();
+    return console.log(userName);
+  };
+
+  formElement.addEventListener('submit', onSubmitForm1);
+  startGameBtn.addEventListener('click', startGame);
+  lower.addEventListener('click', getLower);
+  higher.addEventListener('click', getHigher);
+  keepGoing.addEventListener('click', getMachineCard);
+  // --> Mejor usar un solo event listener para escuchar a ambos botonos,
+  // --> Y un solo event handler en el que se recoja el text content del botón
+  // --> Para identificar cuál es cuál
+  // --> De esa forma además se puede reutilizar mejor el código original
 };

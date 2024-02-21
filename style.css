@@ -1,5 +1,8 @@
-body {
+* {
   box-sizing: border-box;
+}
+
+body {
   margin: 0;
   height: 100vh;
   display: flex;
@@ -12,12 +15,16 @@ body {
   background-size: 125%;
 }
 
+header {
+  width: 75vw;
+  color: #720000;
+  background-color: white;
+}
+
 main {
-  margin-block: 5%;
-  padding-block: 5%;
   padding-inline: 5%;
-  width: 70vw;
-  height: 70vh;
+  width: 75vw;
+  height: 80vh;
   background-color: white;
 }
 
@@ -29,35 +36,93 @@ form {
   width: 100%;
 }
 
-form h2 {
-  text-align: center;
-}
-
 h1 {
   text-align: center;
 }
 
 p {
+  font-size: 1.1em;
+}
+
+input {
   font-size: 1.2em;
 }
 
 .text-input {
-  width: 50%;
-  height: 20px;
   align-self: center;
+  width: 70%;
+  height: 35px;
 }
 
 .btn {
   width: 150px;
-  height: 25px;
+  height: 40px;
   align-self: center;
   border: none;
   background-color: #720000;
   color: white;
   cursor: pointer;
-  transition: 0.25s all;
 }
 
 .btn:hover {
   background-color: #a11919;
+}
+
+.game-container {
+  justify-content: center;
+  flex-direction: column;
+}
+
+.username-container {
+  text-align: center;
+  font-size: 1.2em;
+  color: #720000;
+  transition: 0.25s all;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 125px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.start-game {
+  margin-block: 20px;
+}
+
+.high-low-btns {
+  justify-content: space-around;
+  align-items: center;
+  margin-block: 20px;
+}
+
+.keep-going {
+  width: 100px;
+}
+
+.result-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.result-text {
+  text-align: center;
+}
+
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 40px;
+  border: 1px solid black;
 }
