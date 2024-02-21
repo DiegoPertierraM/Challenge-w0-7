@@ -133,6 +133,7 @@ export const game = () => {
   let machineCard = '';
   let playAgain = true;
   let userChoice;
+  let actualBtn = 'keepGoing';
   const placeholder = document.querySelector('#username');
   let initialContainer = document.querySelector('.initial-container');
   let gameContainer = document.querySelector('.game-container');
@@ -153,43 +154,57 @@ export const game = () => {
     highLowBtns.style.display = 'flex';
     machineCard = pickRandomCard(cardArray);
     card1.innerHTML = machineCard.name + ' ' + machineCard.suit;
-    scoreCounter.innerHTML = score;
+    card2.innerHTML = '';
     matchCounter.innerHTML = match;
   };
 
   const getLower = () => {
-    userChoice = 'lower';
-    const actualCard = pickRandomCard(cardArray);
-    if (actualCard.number < machineCard.number) {
-      resultText.innerHTML = `Ganaste. La carta era ${actualCard.name} de ${actualCard.suit}`;
-      score++;
-    } else {
-      resultText.innerHTML = `Perdiste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+    if (actualBtn !== 'higher' && actualBtn !== 'lower') {
+      userChoice = 'lower';
+      const actualCard = pickRandomCard(cardArray);
+      if (actualCard.number < machineCard.number) {
+        resultText.innerHTML = `Ganaste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+        score++;
+      } else {
+        resultText.innerHTML = `Perdiste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+      }
+      card2.innerHTML = actualCard.name + ' ' + actualCard.suit;
+      match++;
+      scoreCounter.innerHTML = score;
+      matchCounter.innerHTML = match;
     }
-    card2.innerHTML = actualCard.name + ' ' + actualCard.suit;
-    match++;
-    scoreCounter.innerHTML = score;
-    matchCounter.innerHTML = match;
+    actualBtn = 'lower';
+    console.log(cardArray.length);
   };
 
   const getHigher = () => {
-    userChoice = 'higher';
-    const actualCard = pickRandomCard(cardArray);
-    if (actualCard.number > machineCard.number) {
-      resultText.innerHTML = `Ganaste. La carta era ${actualCard.name} de ${actualCard.suit}`;
-      score++;
-    } else {
-      resultText.innerHTML = `Perdiste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+    if (actualBtn !== 'higher' && actualBtn !== 'lower') {
+      userChoice = 'higher';
+      const actualCard = pickRandomCard(cardArray);
+      if (actualCard.number > machineCard.number) {
+        resultText.innerHTML = `Ganaste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+        score++;
+      } else {
+        resultText.innerHTML = `Perdiste. La carta era ${actualCard.name} de ${actualCard.suit}`;
+      }
+      card2.innerHTML = actualCard.name + ' ' + actualCard.suit;
+      match++;
+      scoreCounter.innerHTML = score;
+      matchCounter.innerHTML = match;
     }
-    card2.innerHTML = actualCard.name + ' ' + actualCard.suit;
-    match++;
+    actualBtn = 'higher';
+    console.log(cardArray.length);
   };
 
   const getMachineCard = () => {
-    userChoice = 'higher';
-    machineCard = pickRandomCard(cardArray);
-    card1.innerHTML = machineCard.name + ' ' + machineCard.suit;
-    card2.innerHTML = '';
+    if (actualBtn !== 'keepGoing') {
+      userChoice = 'higher';
+      machineCard = pickRandomCard(cardArray);
+      card1.innerHTML = machineCard.name + ' ' + machineCard.suit;
+      card2.innerHTML = '';
+    }
+    actualBtn = 'keepGoing';
+    console.log(cardArray.length);
   };
 
   const onSubmitForm1 = (event) => {
@@ -208,8 +223,9 @@ export const game = () => {
   lower.addEventListener('click', getLower);
   higher.addEventListener('click', getHigher);
   keepGoing.addEventListener('click', getMachineCard);
-  // --> Mejor usar un solo event listener para escuchar a ambos botonos,
+  // --> Mejor usar un solo event listener para escuchar a ambos botones,
   // --> Y un solo event handler en el que se recoja el text content del botón
   // --> Para identificar cuál es cuál
   // --> De esa forma además se puede reutilizar mejor el código original
+  // --> La mejor forma es usando un querySelectorAll() y un forEach()
 };
