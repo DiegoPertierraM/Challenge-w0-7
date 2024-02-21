@@ -7,5 +7,30 @@
     <link rel="stylesheet" href="style.css" />
     <script src="index.js" type="module"></script>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <div class="initial-screen">
+        <h1>Las reglas del juego son las siguientes:</h1>
+        <p>
+          A cada turno, se extraerá una carta de la baraja francesa, y se te
+          preguntará si crees que la siguiente carta en el mazo va a ser mayor o
+          menor.
+        </p>
+        <p>
+          Los valores son de mayor a menor:
+          <strong>A, K, Q, J, 10, 9, 8 , 7, 6, 5, 4, 3, 2.</strong>
+        </p>
+        <p>♥ Corazones ♦ Diamantes ♣ Tréboles ♠ Picas.</p>
+        <p>
+          Si aciertas, se te sumará un punto a tu puntuación. En cualquier
+          momento puedes darle a cancelar y parar el juego.
+        </p>
+        <form>
+          <h2>Introduce un nombre de usuario si deseas jugar:</h2>
+          <input type="text" class="text-input" required />
+          <input type="submit" value="Enviar" class="btn" />
+        </form>
+      </div>
+    </main>
+  </body>
 </html>

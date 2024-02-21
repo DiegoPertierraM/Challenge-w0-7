@@ -88,61 +88,81 @@ const solveRound = (userChoice, machineCard, actualCard, userName) => {
 };
 
 export const playCardGame = () => {
-  const cardArray = shuffleArray(generateCardArray());
-  let score = 0;
-  let match = 0;
-  const byeMessage = `Tu puntuación ha sido ${score} aciertos en ${match} rondas. Hasta la próxima!`;
+  // const cardArray = shuffleArray(generateCardArray());
+  // let score = 0;
+  // let match = 0;
+  // const byeMessage = `Tu puntuación ha sido ${score} aciertos en ${match} rondas. Hasta la próxima!`;
+  // // let userName = prompt(
+  // //   'Bienvenido! Introduce tu nombre de usuario si deseas jugar:'
+  // // );
+  // // if (userName === null) {
+  // //   return 'Hasta la próxima!';
+  // // }
+  // // if (userName === '' || userName === ' ') {
+  // //   userName = 'jugador';
+  // // }
+  // // alert(`Bienvenido ${userName}!
+  // // Si aciertas, se te sumará un punto a tu puntuación.
+  // // En cualquier momento puedes darle a cancelar y parar el juego.`);
+  // let playAgain = true;
+  // // ---> Usar do while mejor
+  // while (playAgain === true) {
+  //   const machineCard = pickRandomCard(cardArray);
+  //   // alert(`La carta es el ${machineCard.name} de ${machineCard.suit}`);
+  //   const actualCard = pickRandomCard(cardArray);
+  //   do {
+  //     // let userChoice = prompt(
+  //     //   '¿Crees que la siguiente carta será mayor o menor?'
+  //     // ).toLowerCase();
+  //     const { scoreIncrement, matchIncrement, message } = solveRound(
+  //       userChoice,
+  //       machineCard,
+  //       actualCard,
+  //       userName
+  //     );
+  //     score += scoreIncrement;
+  //     match += matchIncrement;
+  //     // alert(message);
+  //     if (matchIncrement) {
+  //       break;
+  //     }
+  //   } while (true);
+  //   console.log('Cards left', cardArray.length);
+  //   if (!cardArray.length) {
+  //     // alert('Se acabaron las cartas!');
+  //     break;
+  //   }
+  //   // playAgain = confirm(`${userName} quieres jugar de nuevo?.
+  //   // De momento has jugado ${match} veces y ganado ${score} veces!`);
+  // }
+  // // alert(`Gracias por haber jugado **${userName}**
+  // //   Has jugado ${match} vez y ganado ${score} vez!`);
+};
 
-  let userName = prompt(
-    'Bienvenido! Introduce tu nombre de usuario si deseas jugar:'
-  );
-  if (userName === null) {
-    return 'Hasta la próxima!';
-  }
-  if (userName === '' || userName === ' ') {
-    userName = 'jugador';
-  }
+const formElement = document.querySelector('form');
+const sendBtn = document.querySelector('.btn');
 
-  alert(`Bienvenido ${userName}! Las reglas del juego son las siguientes:
-  A cada turno, se extraerá una carta de la baraja francesa, y se te preguntará
-  si crees que la siguiente carta en el mazo va a ser mayor o menor.
-  Los valores son de mayor a menor:
-  A, K, Q, J, 10, 9, 8 , 7, 6, 5, 4, 3, 2.
-  ♥ Corazones ♦ Diamantes ♣ Tréboles ♠ Espadas.
-  Si aciertas, se te sumará un punto a tu puntuación.
-  En cualquier momento puedes darle a cancelar y parar el juego.`);
-  let playAgain = true;
-  // ---> Usar do while mejor
-  while (playAgain === true) {
-    const machineCard = pickRandomCard(cardArray);
-    alert(`La carta es el ${machineCard.name} de ${machineCard.suit}`);
-    const actualCard = pickRandomCard(cardArray);
-    do {
-      let userChoice = prompt(
-        '¿Crees que la siguiente carta será mayor o menor?'
-      ).toLowerCase();
-      const { scoreIncrement, matchIncrement, message } = solveRound(
-        userChoice,
-        machineCard,
-        actualCard,
-        userName
-      );
-      score += scoreIncrement;
-      match += matchIncrement;
-      alert(message);
-      if (matchIncrement) {
-        break;
-      }
-    } while (true);
+const hideElement = (element) => {
+  element.style.display = 'none';
+};
 
-    console.log('Cards left', cardArray.length);
-    if (!cardArray.length) {
-      alert('Se acabaron las cartas!');
-      break;
-    }
-    playAgain = confirm(`${userName} quieres jugar de nuevo?.
-De momento has jugado ${match} veces y ganado ${score} veces!`);
-  }
-  alert(`Gracias por haber jugado **${userName}**
-Has jugado ${match} vez y ganado ${score} vez!`);
+const captureValue = () => {
+  const textInput = document.querySelector('.text-input');
+  let userName = textInput.value;
+  return userName;
+};
+
+export const game = () => {
+  const onClick = () => {
+    const initialScreen = document.querySelector('.initial-screen');
+    // hideElement(initialScreen);
+  };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    formElement.reset();
+    return captureValue();
+  };
+
+  formElement.addEventListener('submit', onSubmit);
+  sendBtn.addEventListener('click', onClick);
 };

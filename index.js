@@ -1,3 +1,4 @@
-import { playCardGame } from './helpers.js';
+import { playCardGame, game } from './helpers.js';
 
-playCardGame();
+// playCardGame();
+game();
