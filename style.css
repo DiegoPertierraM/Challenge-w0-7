@@ -21,6 +21,10 @@ header {
   background-color: white;
 }
 
+header h1 {
+  margin-block-start: 40px;
+}
+
 main {
   padding-inline: 5%;
   width: 75vw;
@@ -48,6 +52,14 @@ input {
   font-size: 1.2em;
 }
 
+.initial-container h2 {
+  margin-block: 30px;
+}
+
+.form1 {
+  margin-block: 30px;
+}
+
 .text-input {
   align-self: center;
   width: 70%;
@@ -55,6 +67,7 @@ input {
 }
 
 .btn {
+  margin-block: 30px;
   width: 150px;
   height: 40px;
   align-self: center;
@@ -74,6 +87,7 @@ input {
 }
 
 .username-container {
+  margin-block: 30px;
   text-align: center;
   font-size: 1.2em;
   color: #720000;
@@ -125,4 +139,13 @@ input {
   width: 125px;
   height: 40px;
   border: 1px solid black;
+}
+
+.counter-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.counter-flex label {
+  text-align: center;
 }
